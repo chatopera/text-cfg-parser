@@ -27,6 +27,11 @@ open tmp/nltk_cfg_en_0.png
 [](./docs/png/nltk_cfg_en_0.png)
 
 
+中文的句法
+
+[](./docs/png/1.png)
+
+
 ## 什么是语法解析？
 [转载 http://www.cnblogs.com/](http://www.cnblogs.com/lzhy-35/p/7169087.html)
 

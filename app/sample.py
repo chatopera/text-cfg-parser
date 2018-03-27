@@ -46,6 +46,8 @@ if sys.version_info[0] < 3:
     reload(sys)
     sys.setdefaultencoding("utf-8")
     # raise "Must be using Python 3"
+else:
+    unicode = str
 
 import subprocess
 
@@ -85,9 +87,11 @@ from nltk.draw.tree import TreeView
 from nltk.draw.util import CanvasFrame
 from recursive_descent_parser_model import RecursiveDescentParser
 
-
 def save_tree_png(tree, ouput):
-    # t = Tree.fromstring('(S (NP this tree) (VP (V is) (AdjP pretty)))')
+    '''
+    将Tree保存为png, 不支持中文字符
+    '''
+    print("save_tree_png", tree)
     t = Tree.fromstring(tree)
     ps = "%s.ps" % ouput
     TreeView(t)._cframe.print_to_file(ps)
@@ -205,6 +209,36 @@ class Test(unittest.TestCase):
 
         print(result)
 
+
+    def test_nltk_cfg_zh(self):
+        print("test_nltk_cfg_zh")
+        grammar = nltk.CFG.fromstring("""
+         S -> N VP
+         VP -> V NP | V NP | V N
+         V -> "尊敬"
+         N -> "我们" | "老师"
+         """)
+
+        # Make your POS sentence into a list of tokens.
+        sent = "我们 尊敬 老师".split()
+
+        # Load the grammar into the RecursiveDescentParser.
+        rd_parser = RecursiveDescentParser(grammar)
+
+        result = []
+
+        for i, tree in enumerate(rd_parser.parse(sent)):
+            result.append(tree)
+            print("Tree [%s]: %s" % (i + 1, tree))
+
+        assert len(result) > 0, "Can not recognize CFG tree."
+        if len(result) == 1 :
+            print("Draw tree with Display ...")
+            result[0].draw()
+        else:
+            print("WARN: Get more then one trees.")
+
+        print(result)
 
 def test():
     unittest.main()
