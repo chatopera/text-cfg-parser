@@ -109,3 +109,8 @@ open tmp/nltk_cfg_en_0.png
 ## 更详细的介绍
 [Context-free grammars Introduction](./docs/cfg.pdf)
 
+[自己动手开发编译器（六）上下文无关语言和文法](http://www.cnblogs.com/Ninputer/archive/2011/06/18/2084383.html)
+
+[自己动手开发编译器（七）递归下降的语法分析器](http://www.cnblogs.com/Ninputer/archive/2011/06/21/2085527.html)
+
+[编译原理-递归下降分析器](https://blog.csdn.net/Jiaxin520/article/details/78747495)
